@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Matrix Homepage</title>
+<title>Matrix System</title>
 
 <style>
 
@@ -23,95 +23,50 @@ canvas{
     z-index:-1;
 }
 
-#intro{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:black;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    font-size:50px;
-    z-index:9999;
-
-    text-shadow:
-    0 0 10px #00ff00,
-    0 0 20px #00ff00,
-    0 0 40px #00ff00;
-}
-
-.content{
-    position:relative;
+.container{
     text-align:center;
-    margin-top:120px;
-    display:none;
+    margin-top:80px;
 }
 
 .clock{
-    position:fixed;
-    top:20px;
-    right:20px;
-
-    font-size:50px;
+    font-size:90px;
     font-weight:bold;
-    letter-spacing:4px;
-
-    color:#00ff00;
 
     text-shadow:
-    0 0 5px #00ff00,
     0 0 10px #00ff00,
     0 0 20px #00ff00,
     0 0 40px #00ff00,
     0 0 80px #00ff00;
 
-    animation:
-    flicker 0.12s infinite,
-    glitch 3s infinite;
+    margin-bottom:40px;
 }
 
-@keyframes flicker{
+h1{
+    font-size:70px;
 
-    0%{opacity:1;}
-    2%{opacity:0.4;}
-    4%{opacity:1;}
-    8%{opacity:0.7;}
-    10%{opacity:1;}
-    100%{opacity:1;}
+    text-shadow:
+    0 0 10px #00ff00,
+    0 0 20px #00ff00,
+    0 0 40px #00ff00;
 
+    margin-bottom:30px;
 }
 
-@keyframes glitch{
+.eierbild{
+    width:550px;
+    max-width:80%;
 
-    0%{
-        transform:translate(0);
-    }
-
-    20%{
-        transform:translate(-1px,1px);
-    }
-
-    40%{
-        transform:translate(1px,-1px);
-    }
-
-    60%{
-        transform:translate(-2px,0);
-    }
-
-    80%{
-        transform:translate(2px,1px);
-    }
-
-    100%{
-        transform:translate(0);
-    }
-
+    filter:
+    drop-shadow(0 0 15px #00ff00)
+    drop-shadow(0 0 25px #00ff00);
 }
 
-.button{
+.back{
+
+    position:fixed;
+
+    right:20px;
+    bottom:80px;
 
     background:black;
     color:#00ff00;
@@ -123,14 +78,10 @@ canvas{
     font-size:20px;
 
     cursor:pointer;
-
-    margin-top:30px;
 }
 
-.button:hover{
-
-    box-shadow:
-    0 0 25px #00ff00;
+.back:hover{
+    box-shadow:0 0 25px #00ff00;
 }
 
 #terminal{
@@ -149,40 +100,38 @@ canvas{
     padding:15px;
 
     font-size:18px;
+
+    color:#00ff00;
 }
 
 </style>
+
 </head>
 
 <body>
 
-<div id="intro"></div>
-
-<div id="clock" class="clock"></div>
-
-<div class="matrix-status">
-SYSTEM ONLINE
-</div>
-
 <canvas id="matrix"></canvas>
 
+<div class="container">
+
 <div id="clock" class="clock"></div>
 
-<div class="content" id="content">
+<h1>Baran hat keine Eier mehr</h1>
 
-<h1>Homepage von Baran E. </h1>
-
-<p>Nur die Wahrheit wartet hinter dem nächsten Klick.</p>
-
-<button
-class="button"
-onclick="window.location.href='seite2.html'">
-
-HIER GEHT ES WEITER
-
-</button>
+<img
+src="eier.png"
+alt="Eier"
+class="eierbild">
 
 </div>
+
+<button
+class="back"
+onclick="window.location.href='index.html'">
+
+← Zurück
+
+</button>
 
 <div id="terminal">
 
@@ -191,54 +140,6 @@ HIER GEHT ES WEITER
 </div>
 
 <script>
-
-/* INTRO */
-
-const introText =
-"BARAN...";
-
-let i = 0;
-
-const intro =
-document.getElementById("intro");
-
-function typeIntro(){
-
-if(i < introText.length){
-
-intro.innerHTML +=
-introText.charAt(i);
-
-i++;
-
-setTimeout(typeIntro,120);
-
-}else{
-
-setTimeout(()=>{
-
-intro.innerHTML =
-"Gedulde dich gleich Kommt was COOLES :D...";
-
-},1500);
-
-setTimeout(()=>{
-
-intro.style.display="none";
-
-document.getElementById(
-"content"
-).style.display="block";
-
-},4000);
-
-}
-
-}
-
-typeIntro();
-
-/* UHR */
 
 function updateClock(){
 
@@ -253,17 +154,19 @@ String(now.getMinutes()).padStart(2,'0');
 let s =
 String(now.getSeconds()).padStart(2,'0');
 
-document.getElementById("clock")
-.innerHTML =
+document.getElementById(
+"clock"
+).innerHTML =
 `${h}:${m}:${s}`;
 
 }
 
-setInterval(updateClock,1000);
+setInterval(
+updateClock,
+1000
+);
 
 updateClock();
-
-/* TERMINAL */
 
 const terminal =
 document.getElementById("terminal");
@@ -272,13 +175,13 @@ const messages = [
 
 "> INITIALISIERE MATRIX...",
 "> SUCHE NACH ANOMALIEN...",
-"> Baran hat keine Sackhaare",
+"> AGENT SMITH NICHT GEFUNDEN",
 "> RED PILL ERKANNT",
 "> WAKE UP NEO...",
 "> FOLLOW THE WHITE RABBIT",
+"> ZUGRIFF AUF DIE WAHRHEIT...",
 "> MATRIX KERN ONLINE",
 "> REALITÄT WIRD GELADEN",
-"> ZION VERBUNDEN",
 "> FREIHEITSPROTOKOLL AKTIV"
 
 ];
@@ -298,10 +201,10 @@ msg = 0;
 
 },3000);
 
-/* MATRIX REGEN */
-
 const canvas =
-document.getElementById("matrix");
+document.getElementById(
+"matrix"
+);
 
 const ctx =
 canvas.getContext("2d");
@@ -312,13 +215,10 @@ window.innerWidth;
 canvas.height =
 window.innerHeight;
 
-const letters =
-"ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-
 const chars =
-letters.split("");
+"01ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 
-const fontSize = 16;
+const fontSize = 18;
 
 const columns =
 canvas.width/fontSize;
@@ -364,32 +264,18 @@ drops[i]*fontSize
 
 if(
 drops[i]*fontSize >
-canvas.height &&
+canvas.height
+&&
 Math.random() > 0.975
 ){
 drops[i]=0;
 }
 
 drops[i]++;
-
 }
-
 }
 
 setInterval(draw,35);
-
-window.addEventListener(
-"resize",
-()=>{
-
-canvas.width =
-window.innerWidth;
-
-canvas.height =
-window.innerHeight;
-
-}
-);
 
 </script>
 
